@@ -1,19 +1,32 @@
-<h1>Add task</h1>
-<%= form_with model: @new_task do |f| %>
-  <%= f.text_field :description %>
-  <%= f.submit 'Add' %>
-<% end %>
+<div class="row">
+  <div class="col-5 mx-auto">
+    <%= form_with(model: @new_task) do |f| %>
+      <div class="input-group mb-3">
+        <%= f.text_field :description, placeholder: 'What do you need to do?', class: 'form-control' %>
+        <div class="input-group-append">
+          <%= f.submit 'Add', class: 'btn btn-outline-secondary' %>
+        </div>
+      </div>
+    <% end %>
+    <hr/>
+  </div>
+</div>
 
-<hr/>
+<div class="row">
+  <div class="col-5 mx-auto">
+    <h3>To do:</h3>
+    <ul id="pending-tasks" class="list-group">
+      <%= render @pending_tasks %>
+    </ul>
+    <hr/>
+  </div>
+</div>
 
-<h1>Pending tasks</h1>
-<ul id="pending-tasks">
-  <%= render @pending_tasks %>
-</ul>
-
-<hr/>
-
-<h1>Completed tasks</h1>
-<ul id="completed-tasks">
-  <%= render @completed_tasks %>
-</ul>
+<div class="row">
+  <div class="col-5 mx-auto">
+    <h3>Done:</h3>
+    <ul id="completed-tasks" class="list-group">
+      <%= render @completed_tasks %>
+    </ul>
+  </div>
+</div>

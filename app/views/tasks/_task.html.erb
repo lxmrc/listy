@@ -1,10 +1,20 @@
-<li>
-  <%= task.description %>
-  <% unless task.completed? %>
-    <%= link_to 'Complete', complete_task_path(task.id) %>
-  <% else %>
-    <%= link_to 'Uncomplete', uncomplete_task_path(task.id) %>
-  <% end %>
-  &middot;
-  <%= link_to 'Delete', task_path(task.id), method: :delete %>
+<li class="list-group-item p-2">
+  <big><%= task.description %></big>
+  <div class="float-right">
+    <% unless task.completed? %>
+      <%= link_to complete_task_path(task.id),
+                  class: 'btn btn-outline-success btn-sm' do %>
+                  <i class="fas fa-check"></i>
+      <% end %>
+    <% else %>
+      <%= link_to uncomplete_task_path(task.id),
+                  class: 'btn btn-outline-primary btn-sm' do%>
+                  <i class="fas fa-undo"></i>
+      <% end %>
+    <% end %>
+    <%= link_to task_path(task.id), method: :delete,
+        class: 'btn btn-outline-danger btn-sm' do%>
+        <i class="fas fa-trash-alt"></i>
+    <% end %>
+  </div>
 </li>
