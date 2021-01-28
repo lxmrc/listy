@@ -1,0 +1,19 @@
+<h1>Add task</h1>
+<%= form_with model: @new_task do |f| %>
+  <%= f.text_field :description %>
+  <%= f.submit 'Add' %>
+<% end %>
+
+<hr/>
+
+<h1>Pending tasks</h1>
+<ul id="pending-tasks">
+  <%= render @pending_tasks %>
+</ul>
+
+<hr/>
+
+<h1>Completed tasks</h1>
+<ul id="completed-tasks">
+  <%= render @completed_tasks %>
+</ul>

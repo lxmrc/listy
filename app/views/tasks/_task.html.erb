@@ -1,0 +1,10 @@
+<li>
+  <%= task.description %>
+  <% unless task.completed? %>
+    <%= link_to 'Complete', complete_task_path(task.id) %>
+  <% else %>
+    <%= link_to 'Uncomplete', uncomplete_task_path(task.id) %>
+  <% end %>
+  &middot;
+  <%= link_to 'Delete', task_path(task.id), method: :delete %>
+</li>
