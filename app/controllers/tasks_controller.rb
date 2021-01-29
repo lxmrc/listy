@@ -1,10 +1,12 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: [:complete, :uncomplete, :destroy]
+  before_action :find_task, only: [:show, :complete, :uncomplete, :destroy]
+  before_action :retrieve_tasks, only: [:index, :complete, :uncomplete, :destroy]
 
   def index
-    @pending_tasks = Task.where(completed: false)
-    @completed_tasks = Task.where(completed: true)
     @new_task = Task.new
+  end
+
+  def show
   end
 
   def create
@@ -18,7 +20,7 @@ class TasksController < ApplicationController
     @task.complete
     respond_to do |format|
       format.html { redirect_to tasks_path }
-      format.js
+      format.js { render 'update_list' }
     end
   end
 
@@ -26,13 +28,16 @@ class TasksController < ApplicationController
     @task.uncomplete
     respond_to do |format|
       format.html { redirect_to tasks_path }
-      format.js
+      format.js { render 'update_list' }
     end
   end
 
   def destroy
     @task.destroy
-    redirect_to tasks_path
+    respond_to do |format|
+      format.html { redirect_to tasks_path }
+      format.js { render 'update_list' }
+    end
   end
 
   private
@@ -43,5 +48,10 @@ class TasksController < ApplicationController
 
     def find_task
       @task = Task.find(params[:id])
+    end
+
+    def retrieve_tasks
+      @pending_tasks = Task.where(completed: false)
+      @completed_tasks = Task.where(completed: true)
     end
 end

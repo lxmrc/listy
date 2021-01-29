@@ -1,18 +1,22 @@
-<li class="list-group-item p-2">
-  <big><%= task.description %></big>
+<li class="list-group-item p-2 pl-3">
+  <%= link_to task.description, task, class: 'task-description' %>
   <div class="float-right">
     <% unless task.completed? %>
       <%= link_to complete_task_path(task.id),
+                  remote: true,
                   class: 'btn btn-outline-success btn-sm' do %>
                   <i class="fas fa-check"></i>
       <% end %>
     <% else %>
       <%= link_to uncomplete_task_path(task.id),
+                  remote: true,
                   class: 'btn btn-outline-primary btn-sm' do%>
                   <i class="fas fa-undo"></i>
       <% end %>
     <% end %>
-    <%= link_to task_path(task.id), method: :delete,
+    <%= link_to task_path(task.id), 
+        method: :delete,
+        remote: true,
         class: 'btn btn-outline-danger btn-sm' do%>
         <i class="fas fa-trash-alt"></i>
     <% end %>
